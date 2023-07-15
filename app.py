@@ -23,3 +23,11 @@ app = Flask(__name__)
 @app.route("/", methods = ["GET", "POST"])
 def index():
     return render_template("index.html")
+
+@app.route("/exp", methods = ["GET", "POST"])
+def exp():
+    return render_template("exp.html")
+
+@app.route("/qns", methods = ["GET", "POST"])
+def qns():
+    return render_template("qns.html")
