@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, flash, redirect, render_template, request
+from flask import Flask, flash, redirect, render_template, request, url_for
 
 import sqlite3
 from sqlite3 import Error
@@ -20,14 +20,19 @@ def create_connection(DB_PATH):
 # Configure application
 app = Flask(__name__)
 
+# fetch settings data with each save
+
 @app.route("/", methods = ["GET", "POST"])
 def index():
-    return render_template("index.html")
+    if request.method == "POST":
+        return "200_OK"
+    else:
+        return render_template("index.html", path = "/")
 
 @app.route("/exp", methods = ["GET", "POST"])
 def exp():
-    return render_template("exp.html")
+    return render_template("exp.html", path = "/exp")
 
 @app.route("/qns", methods = ["GET", "POST"])
 def qns():
-    return render_template("qns.html")
+    return render_template("qns.html", path = "/qns")

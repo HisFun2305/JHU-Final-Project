@@ -1,0 +1,208 @@
+html, body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+div#desc {
+    background-color: #222222;
+    display: flex;
+    height: max-content;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: azure;
+    text-align: center;
+    transition: color 1s;
+    font-family: Notosans, Calibri;
+}
+
+div>h2 {
+    max-width: 1200px;
+    font-weight: bold;
+    font-size: 50px;
+    padding: 2rem;
+}
+
+p {
+    font-size: 20px;
+    width: 80%;
+    max-width: 1000px;
+}
+
+label {
+    text-shadow: None;
+    color: black;
+    margin-right: 0.5rem;
+}
+
+.form-label-light{
+    text-shadow: inherit;
+    color: inherit;
+    margin-right: 0.5rem;
+}
+
+.btn {
+    height: 2rem;
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+}
+
+.btn-group {
+    flex-direction: row;
+    align-items: center;
+}
+
+.italics {
+    font-style: italic;
+    font-size: 30px;
+}
+
+.img-fluid {
+    position: absolute;
+    top: 0.375rem;
+    right: 0.375rem;
+    height: 2.25rem;
+    width: 2.25rem;
+    rotate: 0deg;
+    transition: rotate, 0.4s;
+}
+
+.none {
+    display: none;
+}
+
+#settings-input {
+    display: flex;
+    flex-direction: column;
+}
+
+#initial-input {
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 2rem;
+    border: 1px solid azure;
+    border-radius: 2rem;
+}
+
+#initial-input>.form-child {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.form-child {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#settings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: azure;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1.5rem;
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    transition: background-color 1s, width 0.2s ease-out, height 0.2s ease-out;
+}
+
+@font-face {
+    font-family: NotoSans;
+    src: url(fonts/Noto_Sans/NotoSans-Regular.ttf)
+}
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #222222;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+
+.slider-light {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 25px;
+    background: grey;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider-light:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: grey;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: grey;
+  cursor: pointer;
+}
+
+.slider-light::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: azure;
+    cursor: pointer;
+  }
+  
+  .slider-light::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: azure;
+    cursor: pointer;
+  }
+/* Name: Bright Turquoise
+Hex: #0AE4EE
+RGB: (10, 228, 238)
+CMYK: 0.957, 0.042, 0, 0.066
+DODGER BLUE	
+Name: Dodger Blue
+Hex: #179CF9
+RGB: (23, 156, 249)
+CMYK: 0.907, 0.373, 0, 0.023
+RAISIN BLACK	
+Name: Raisin Black
+Hex: #222222
+RGB: (34, 34, 34)
+CMYK: 0, 0, 0, 0.866
+EGYPTIAN BLUE	
+Name: Egyptian Blue
+Hex: #0B32B0
+RGB: (11, 50, 176)
+CMYK: 0.937, 0.715, 0, 0.309
+PICTON BLUE	
+Name: Picton Blue
+Hex: #4CAEFF
+RGB: (76, 174, 255)
+CMYK: 0.701, 0.317, 0, 0 */
