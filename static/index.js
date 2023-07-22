@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var b2 = document.getElementById("btnradio2-vis");
     save.addEventListener("click", function(event){
         event.preventDefault();
-        var data = {volume: vol.ariaValueMax, btn1: b1.checked, btn2:b2.checked};
+        var data = {volume: vol.ariaValueMax, btn1: b1.checked, btn2: b2.checked};
         postJSON(data);
     })
     
