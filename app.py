@@ -1,4 +1,5 @@
 import os
+import json
 
 from flask import Flask, flash, redirect, render_template, request, url_for
 
@@ -20,11 +21,13 @@ def create_connection(DB_PATH):
 # Configure application
 app = Flask(__name__)
 
-# fetch settings data with each save
+setting_values = {"volume": 0, "inputSetting": 0}
 
 @app.route("/", methods = ["GET", "POST"])
 def index():
     if request.method == "POST":
+        setting_values["volume"] = request.form.get("volume")
+        setting_values["inputSetting"] = request.form.get("btnradio")
         return "200_OK"
     else:
         return render_template("index.html", path = "/")
@@ -36,3 +39,7 @@ def exp():
 @app.route("/qns", methods = ["GET", "POST"])
 def qns():
     return render_template("qns.html", path = "/qns")
+
+@app.route("/settings", methods = ["GET", "POST"])
+def settings():
+    return json.dumps(setting_values)

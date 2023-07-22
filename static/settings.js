@@ -1,11 +1,21 @@
 var volVal = 0
-var btn1Checked = ""
-var btn2Checked = "checked"
+var btn1Checked = "checked"
+var btn2Checked = ""
 
 async function logJSONData() {
-    const response = await fetch("/");
-    const jsonData = await response.json();
-    console.log(jsonData)
+    return new Promise(async function(resolve){
+        const response = await fetch("/settings");
+        const jsonData = await response.json();
+        console.log(jsonData)
+        volVal = jsonData.volume
+        if (jsonData.inputSetting == 0){
+            btn1Checked = "checked", btn2Checked = ""
+        }
+        else {
+            btn1Checked = "", btn2Checked = "checked"
+        }
+        resolve(jsonData);
+    });
 }
 
 async function postJSON(data) {
@@ -23,9 +33,10 @@ async function postJSON(data) {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", async function(){
     var settings = document.getElementById("settings")
     var settingsForm = document.getElementById("settings-input")
+    await logJSONData();
 
     function initSettings() {
         settings = document.getElementById("settings")
@@ -59,7 +70,6 @@ document.addEventListener("DOMContentLoaded", function(){
                 var b1 = document.getElementById("btnradio1");
                 var b2 = document.getElementById("btnradio2");
                 vol.addEventListener("input", function(event){
-                    audio.volume = (vol.value/100);
                     volVal = vol.value;
                     var volVis = document.getElementById("volume-vis");
                     if (volVis){
