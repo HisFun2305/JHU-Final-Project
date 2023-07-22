@@ -1,3 +1,6 @@
+var volVal = 0
+var btn1Checked = ""
+var btn2Checked = "checked"
 
 async function logJSONData() {
     const response = await fetch("/");
@@ -23,19 +26,6 @@ async function postJSON(data) {
 document.addEventListener("DOMContentLoaded", function(){
     var settings = document.getElementById("settings")
     var settingsForm = document.getElementById("settings-input")
-    const SETTINGS_FORM = `
-    <div class="form-child">
-        <label for="volume" class="form-label">Volume</label>
-        <input type="range" class="slider" min="0" max="100" value="0" id="volume" name="volume">
-    </div>
-    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" value="0" checked>
-        <label class="btn btn-outline-dark" for="btnradio1">Spacebar</label>
-      
-        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" value="1">
-        <label class="btn btn-outline-dark" for="btnradio2">Keyboard</label>
-    </div>
-    <button id="save" type="submit" class="btn btn-dark">Save</button>`
 
     function initSettings() {
         settings = document.getElementById("settings")
@@ -44,7 +34,19 @@ document.addEventListener("DOMContentLoaded", function(){
         settings.firstElementChild.style.rotate = "90deg";
         return new Promise(function (resolve) {
             setTimeout(function(){
-                settingsForm.innerHTML = SETTINGS_FORM
+                settingsForm.innerHTML = `
+                <div class="form-child">
+                    <label for="volume" class="form-label">Volume</label>
+                    <input type="range" class="slider" min="0" max="100" value="${volVal}" id="volume" name="volume">
+                </div>
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" value="0" ${btn1Checked}>
+                    <label class="btn btn-outline-dark" for="btnradio1">Spacebar</label>
+                  
+                    <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" value="1" ${btn2Checked}>
+                    <label class="btn btn-outline-dark" for="btnradio2">Right-click</label>
+                </div>
+                <button id="save" type="submit" class="btn btn-dark">Save</button>`
                 for (c of settings.children){
                     if (c.id != "img"){
                         c.addEventListener("click", function(event){
@@ -53,11 +55,39 @@ document.addEventListener("DOMContentLoaded", function(){
                     }
                 }
                 var save = document.getElementById("save")
+                var vol = document.getElementById("volume");
+                var b1 = document.getElementById("btnradio1");
+                var b2 = document.getElementById("btnradio2");
+                vol.addEventListener("input", function(event){
+                    audio.volume = (vol.value/100);
+                    volVal = vol.value;
+                    var volVis = document.getElementById("volume-vis");
+                    if (volVis){
+                        volVis.value = `${vol.value}`;
+                    }
+                })
+                b1.addEventListener("click", function(event){
+                    btn1Checked = "checked"
+                    btn2Checked = ""
+                    var b1Settings = document.getElementById("btnradio1-vis")
+                    var txtOut = document.getElementById("txt2")
+                    txtOut ? txtOut.innerText = "Your task is simple: whenever you hear a beep, press the spacebar, and try to follow the rhythm." : false
+                    if (b1Settings) {
+                        b1Settings.checked = true
+                    }
+                })
+                b2.addEventListener("click", function(event){
+                    btn2Checked = "checked"
+                    btn1Checked = ""
+                    var txtOut = document.getElementById("txt2")
+                    txtOut ? txtOut.innerText = "Your task is simple: whenever you hear a beep, click the right mouse button, and try to follow the rhythm." : false
+                    var b2Settings = document.getElementById("btnradio2-vis")
+                    if (b2Settings) {
+                        b2Settings.checked = true
+                    }
+                })  
                 save.addEventListener("click", function(event){
-                    event.preventDefault();
-                    var vol = document.getElementById("volume");
-                    var b1 = document.getElementById("btnradio1");
-                    var b2 = document.getElementById("btnradio2");
+                    event.preventDefault();              
                     var data = {volume: vol.ariaValueMax, btn1: b1.checked, btn2:b2.checked};
                     postJSON(data);
                 })

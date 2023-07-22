@@ -32,15 +32,6 @@ function normaliseXY(pX, pY, posX, posY){
     return {x: (diffx/Math.abs(diffx))*Math.cos(Math.abs(a)), y: (diffy/Math.abs(diffy))*Math.sin(Math.abs(a))}
 }
 
-// volSlider = document.getElementById("volume")
-// volSlider.addEventListener("input", function(event){
-//     audio.volume = (volSlider.value/100)
-//     if (audio.duration = 0 || audio.paused) {
-//         audio.loop = true;
-//         audio.play();
-//     }
-// })
-
 document.addEventListener("DOMContentLoaded", function(event) {
     var div = document.getElementById("desc");
     div.addEventListener("mousemove", spicyShadows);
@@ -53,5 +44,38 @@ document.addEventListener("DOMContentLoaded", function(event) {
         var data = {volume: vol.ariaValueMax, btn1: b1.checked, btn2: b2.checked};
         postJSON(data);
     })
-    
+    vol.addEventListener("input", function(event){
+        volVal = vol.value;
+        var volSettings = document.getElementById("volume");
+        if (volSettings){
+            volSettings.value = `${vol.value}`;
+        }
+    })
+    b1.addEventListener("click", function(event){
+        btn1Checked = "checked"
+        btn2Checked = ""
+        var b1Settings = document.getElementById("btnradio1")
+        var txtOut = document.getElementById("txt2")
+        txtOut.innerText = "Your task is simple: whenever you hear a beep, press the spacebar, and try to follow the rhythm."
+        if (b1Settings) {
+            b1Settings.checked = true
+        }
+    })
+    b2.addEventListener("click", function(event){
+        btn2Checked = "checked"
+        btn1Checked = ""
+        var txtOut = document.getElementById("txt2")
+        txtOut.innerText = "Your task is simple: whenever you hear a beep, click the right mouse button, and try to follow the rhythm."
+        var b2Settings = document.getElementById("btnradio2")
+        if (b2Settings) {
+            b2Settings.checked = true
+        }
+    })
+    setInterval(function() {
+        audio.volume = (vol.value/100);
+        if (audio.duration = 0 || audio.paused) {
+            audio.loop = true;
+            audio.play();
+        }
+    }, 100);
 });
