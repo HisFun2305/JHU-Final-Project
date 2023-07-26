@@ -7,14 +7,14 @@ html, body {
 div#desc {
     background-color: #222222;
     display: flex;
+    min-height: 100vh;
     height: max-content;
-    width: 100%;
+    min-width: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: azure;
     text-align: center;
-    transition: color 1s;
     font-family: Notosans, Calibri;
 }
 
@@ -23,12 +23,18 @@ div>h2 {
     font-weight: bold;
     font-size: 50px;
     padding: 2rem;
+    transition: opacity, 1s;
 }
 
 p {
     font-size: 20px;
     width: 80%;
     max-width: 1000px;
+    transition: opacity, 1s;
+}
+
+form{
+    transition: opacity, 1s;
 }
 
 label {
@@ -44,13 +50,14 @@ label {
 }
 
 .btn {
-    height: 2rem;
-    margin-top: 0.3rem;
-    margin-bottom: 0.3rem;
+    height: fit-content;
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
 }
 
 .btn-group {
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
 }
 
@@ -69,8 +76,16 @@ label {
     transition: rotate, 0.4s;
 }
 
-.none {
+.sm {
     display: none;
+}
+
+.lg {
+    display: inherit;
+}
+
+#txt3{
+    opacity: 0;
 }
 
 #settings-input {
@@ -79,7 +94,7 @@ label {
 }
 
 #initial-input {
-    width: max-content;
+    width: 60%;
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -114,6 +129,30 @@ label {
     right: 2rem;
     top: 2rem;
     transition: background-color 1s, width 0.2s ease-out, height 0.2s ease-out;
+}
+
+@media (max-width: 575.98px){
+    div#desc{
+        width: 100vw;
+    }
+    .sm {
+        display: inherit;
+    }
+    .lg {
+        display: none;
+    }
+    div>h2 {
+        font-size: 32px;
+    }
+    p {
+        font-size: 11px;
+    }
+    label {
+        font-size: 11px;
+    }
+    .btn {
+        font-size: 11px;
+    }
 }
 
 @font-face {

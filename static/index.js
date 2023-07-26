@@ -41,8 +41,44 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var b2 = document.getElementById("btnradio2-vis");
     save.addEventListener("click", function(event){
         event.preventDefault();
-        var data = {volume: vol.ariaValueMax, btn1: b1.checked, btn2: b2.checked};
+        event.stopPropagation();
+        var data = {volume: vol.value, inputSetting: b2.checked ? 0 : 1};
+        console.log(data)
         postJSON(data);
+        var cont = document.getElementById("txt3");
+        cont.style.opacity = 1;
+        save.blur()
+        if (b1.checked) {
+            txt3 = document.getElementById("txt3");
+            txt3.innerText = "[Press the spacebar to begin]"
+            document.addEventListener("keypress", function(event){
+                if (event.code == "Space") {
+                    for (var c of div.children){
+                        if (c.id != "settings"){
+                            c.style.opacity = 0;
+                        }
+                    }
+                    setInterval(function(){
+                        window.location.href = `${window.location.origin}/exp`;
+                    }, 1100);
+                }
+            });
+        }
+        
+        else if (b2.checked) {
+            txt3 = document.getElementById("txt3");
+            txt3.innerText = "[Left-click or tap the screen to begin]"
+            document.addEventListener("click", function(event){
+                for (var c of div.children){
+                    if (c.id != "settings"){
+                        c.style.opacity = 0;
+                    }
+                }
+                setInterval(function(){
+                    window.location.href = `${window.location.origin}/exp`;
+                }, 1100);
+            });
+        }
     })
     vol.addEventListener("input", function(event){
         volVal = vol.value;
@@ -65,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         btn2Checked = "checked"
         btn1Checked = ""
         var txtOut = document.getElementById("txt2")
-        txtOut.innerText = "Your task is simple: whenever you hear a beep, click the right mouse button, and try to follow the rhythm."
+        txtOut.innerText = "Your task is simple: whenever you hear a beep, click the left mouse button or tap the screen, and try to follow the rhythm."
         var b2Settings = document.getElementById("btnradio2")
         if (b2Settings) {
             b2Settings.checked = true

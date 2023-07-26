@@ -8,26 +8,29 @@
 {% block title %}Welcome!{% endblock %}
 
 {% block body %}
-    <h2 id="header">Welcome to APERTURE: Auditory Perception Experiment Relating To Unsteady Rhythmic Expriences</h2>
+    <h2 id="header">Welcome to APERTURE: Auditory Perception Experiment Relating To Unsteady Rhythmic Experiences</h2>
     <p id="txt1">You will hear a series of calibration beeps, where the time between beeps will constantly decrease. This will be followed by a series of beeps that follow a regular rhythm. This rhythm will change randomly </p>
-    <p id="txt2">Your task is simple: whenever you hear a beep, press the spacebar, and try to follow the rhythm.</p>
-    <form action="{{  path  }}" method="post" id="initial-input">
+    <p id="txt2">Your task is simple: whenever you hear a beep, click the right mouse button or tap the screen, and try to follow the rhythm.</p>
+    <form id="initial-input">
         <div class="form-child">
-            <label for="volume-vis" class="form-label-light">Increase the volume until the music is clear and loud</label>
+            <label for="volume-vis" class="form-label-light lg">Increase the volume until the music is clear and loud</label>
+            <label for="volume-vis" class="form-label-light sm">volume:</label>
             <input type="range" class="slider-light" min="0" max="100" value="0" id="volume-vis" name="volume">
         </div>
+        <hr>
         <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
             <label class="form-label-light">Select your preferred input: </label>
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio1-vis" autocomplete="off" value="0" checked>
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio1-vis" autocomplete="off" value="0">
             <label class="btn btn-outline-light" for="btnradio1-vis">Spacebar</label>
           
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio2-vis" autocomplete="off" value="1">
-            <label class="btn btn-outline-light" for="btnradio2-vis">Right-click</label>
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio2-vis" autocomplete="off" value="1" checked>
+            <label class="btn btn-outline-light" for="btnradio2-vis">Left-click/Tap</label>
         </div>
-        <button id="save-vis" type="submit" class="btn btn-light">Save your preferences</button>
+        <hr>
+        <button id="save-vis" type="submit" class="btn btn-light"><span class="sm">Save</span><span class="lg">Save your preferences</span></button>
         <label class="form-label-light">These options will also be avaliable in the settings menu above</label>
     </form> 
-    <p id="txt3" class="italics none">[Press the spacebar to begin]</p>
+    <p id="txt3" class="italics"></p>
     <!-- Need to check if device is a PC/phone, or if a keyboard is avaliable -->
     <!-- allow option to change volume -->
 {% endblock %}

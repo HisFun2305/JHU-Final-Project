@@ -1,6 +1,6 @@
 var volVal = 0
-var btn1Checked = "checked"
-var btn2Checked = ""
+var btn2Checked = "checked"
+var btn1Checked = ""
 
 async function logJSONData() {
     return new Promise(async function(resolve){
@@ -9,10 +9,10 @@ async function logJSONData() {
         console.log(jsonData)
         volVal = jsonData.volume
         if (jsonData.inputSetting == 0){
-            btn1Checked = "checked", btn2Checked = ""
+            btn2Checked = "checked", btn1Checked = ""
         }
         else {
-            btn1Checked = "", btn2Checked = "checked"
+            btn2Checked = "", btn1Checked = "checked"
         }
         resolve(jsonData);
     });
@@ -33,6 +33,17 @@ async function postJSON(data) {
     }
 }
 
+function dynSettings(){
+    if (window.innerWidth < 575.98){
+        settings.style.width = "15rem";
+        settings.style.height = "8rem";
+    }
+    else{
+        settings.style.width = "17rem";
+        settings.style.height = "10rem";
+    }
+}
+
 document.addEventListener("DOMContentLoaded", async function(){
     var settings = document.getElementById("settings")
     var settingsForm = document.getElementById("settings-input")
@@ -40,8 +51,8 @@ document.addEventListener("DOMContentLoaded", async function(){
 
     function initSettings() {
         settings = document.getElementById("settings")
-        settings.style.width = "15rem";
-        settings.style.height = "8rem";
+        dynSettings();
+        window.addEventListener("resize", dynSettings);
         settings.firstElementChild.style.rotate = "90deg";
         return new Promise(function (resolve) {
             setTimeout(function(){
@@ -51,11 +62,11 @@ document.addEventListener("DOMContentLoaded", async function(){
                     <input type="range" class="slider" min="0" max="100" value="${volVal}" id="volume" name="volume">
                 </div>
                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" value="0" ${btn1Checked}>
+                    <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" value="1" ${btn1Checked}>
                     <label class="btn btn-outline-dark" for="btnradio1">Spacebar</label>
                   
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" value="1" ${btn2Checked}>
-                    <label class="btn btn-outline-dark" for="btnradio2">Right-click</label>
+                    <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" value="0" ${btn2Checked}>
+                    <label class="btn btn-outline-dark" for="btnradio2">L-click/Tap</label>
                 </div>
                 <button id="save" type="submit" class="btn btn-dark">Save</button>`
                 for (c of settings.children){
@@ -90,7 +101,7 @@ document.addEventListener("DOMContentLoaded", async function(){
                     btn2Checked = "checked"
                     btn1Checked = ""
                     var txtOut = document.getElementById("txt2")
-                    txtOut ? txtOut.innerText = "Your task is simple: whenever you hear a beep, click the right mouse button, and try to follow the rhythm." : false
+                    txtOut ? txtOut.innerText = "Your task is simple: whenever you hear a beep, click the left mouse button or tap the screen, and try to follow the rhythm." : false
                     var b2Settings = document.getElementById("btnradio2-vis")
                     if (b2Settings) {
                         b2Settings.checked = true
@@ -98,7 +109,7 @@ document.addEventListener("DOMContentLoaded", async function(){
                 })  
                 save.addEventListener("click", function(event){
                     event.preventDefault();              
-                    var data = {volume: vol.ariaValueMax, btn1: b1.checked, btn2:b2.checked};
+                    var data = {volume: vol.value, inputSetting: b2.checked ? 0 : 1};
                     postJSON(data);
                 })
                 resolve(true)
@@ -117,6 +128,7 @@ document.addEventListener("DOMContentLoaded", async function(){
             settings.style.height = "3rem";
             settings.firstElementChild.style.rotate = "0deg";
             settingsForm.innerHTML = "";
+            window.removeEventListener("resize", dynSettings);
             i--;
         }
     })

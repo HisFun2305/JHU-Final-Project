@@ -26,8 +26,8 @@ setting_values = {"volume": 0, "inputSetting": 0}
 @app.route("/", methods = ["GET", "POST"])
 def index():
     if request.method == "POST":
-        setting_values["volume"] = request.form.get("volume")
-        setting_values["inputSetting"] = request.form.get("btnradio")
+        setting_values["volume"] = int(request.json["volume"])
+        setting_values["inputSetting"] = request.json["inputSetting"]
         return "200_OK"
     else:
         return render_template("index.html", path = "/")
@@ -42,4 +42,5 @@ def qns():
 
 @app.route("/settings", methods = ["GET", "POST"])
 def settings():
-    return json.dumps(setting_values)
+    set = json.dumps(setting_values)
+    return set
