@@ -5,7 +5,44 @@
 {% endblock %}
 
 {% block title %}
+Questionnaire
 {% endblock %}
 
 {% block body %}
+<form id="qns" action="/qns" method="post">
+    <p>Quesitons with an asterisk (*) are <u>required</u></p>
+    <label class="form-label-light">*Select your age range (includes start and end age): </label>
+    <div class="btn-group" role="group" aria-label="radio toggle button group">
+        <input type="radio" class="btn-check" name="ageGrp" id="age1" autocomplete="off" value="0">
+        <label class="btn btn-outline-light" for="age1">1-12</label>
+        <input type="radio" class="btn-check" name="ageGrp" id="age2" autocomplete="off" value="1">
+        <label class="btn btn-outline-light" for="age2">13-17</label>
+        <input type="radio" class="btn-check" name="ageGrp" id="age3" autocomplete="off" value="2">
+        <label class="btn btn-outline-light" for="age3">18-34</label>
+        <input type="radio" class="btn-check" name="ageGrp" id="age4" autocomplete="off" value="3">
+        <label class="btn btn-outline-light" for="age4">35-64</label>
+        <input type="radio" class="btn-check" name="ageGrp" id="age5" autocomplete="off" value="4">
+        <label class="btn btn-outline-light" for="age5">65 or older</label>
+    </div>
+    <hr>
+    <label class="form-label-light">
+        *Do you have any rhythmic experience? This includes ample experience (>1yr) of playing an instrument and time spent playing rhythm games (>8hrs), along with other activicties that involve following a rhythm
+    </label>
+    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+        <input type="radio" class="btn-check" name="prevExp" id="yexp" autocomplete="off" value="0">
+        <label class="btn btn-outline-light" for="yexp">yes</label>
+        <input type="radio" class="btn-check" name="prevExp" id="nexp" autocomplete="off" value="1">
+        <label class="btn btn-outline-light" for="nexp">No</label>
+    </div>
+    <hr>
+    <label class="form-label-light">
+        Do you have any medical conditions that affects your motor function? If so, please state it below
+    </label> 
+    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+        <input type="text" class="form-control text-bg-dark" name="med">
+    </div>
+    <hr>
+    <button id="save-vis" type="submit" class="btn btn-light">Submit</button>
+    <p id="err">{{ err }}</p>
+</form> 
 {% endblock %}

@@ -44,7 +44,7 @@ p.cdown{
     transition: opacity, 0.5s, font-size, 0.5s;
 }
 
-form{
+form {
     transition: opacity, 1s;
 }
 
@@ -53,6 +53,27 @@ label {
     text-shadow: None;
     color: black;
     margin-right: 0.5rem;
+}
+
+#qns>hr {
+    width: 60%;
+}
+
+#qns{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#qns>label{
+    max-width: 60%;
+}
+
+#thanks{
+    font-size: 8vw;
+    font-weight: 600;
+    font-style: italic;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .form-label-light{
