@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", async function(){
     }
     await new Promise(function(resolve){
         setTimeout(function(){
-            three.style.fontSize = "40vw";
+            three.style.fontSize = "min(35vw, 600px)";
             three.style.opacity = 1;
         }, 1000);
         setTimeout(function(){
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", async function(){
             three.style.fontSize = "1vw";
         }, 2000);
         setTimeout(function(){
-            two.style.fontSize = "40vw";
+            two.style.fontSize = "min(35vw, 600px)";
             two.style.opacity = 1;
         }, 3000);
         setTimeout(function(){
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", async function(){
             two.style.fontSize = "1vw";
         }, 4000);
         setTimeout(function(){
-            one.style.fontSize = "40vw";
+            one.style.fontSize = "min(35vw, 600px)";
             one.style.opacity = 1;
         }, 5000);
         setTimeout(function(){
@@ -202,6 +202,9 @@ document.addEventListener("DOMContentLoaded", async function(){
                 resolve(false);
             },21000);
         });
+    }
+    for (f in freqList){
+        freqList[f] = freqList[f].toString()
     }
     postData([freqList, timeLists]);
     window.location.href = `${window.location.origin}/qns`;

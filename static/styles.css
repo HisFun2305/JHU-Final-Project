@@ -35,6 +35,8 @@ p {
 }
 
 p.cdown{
+    margin: none;
+    padding: none;
     font-family: Handjet,'Courier New', Courier, monospace;
     font-style: italic;
     font-weight: 900;

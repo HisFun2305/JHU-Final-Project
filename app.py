@@ -41,8 +41,9 @@ def exp():
     global setting_values
     if request.method == "POST":
         data = request.json
+        print(data)
         try: 
-            data_formatted[0] = "|".join(data[0])
+            data_formatted.append("|".join(data[0]))
         except Exception as e: 
             print(e)
             return redirect("/")
@@ -84,9 +85,6 @@ def qns():
         db.execute("INSERT INTO data (a, b, c, d, e, ageGrp, exp, med) VALUES (?,?,?,?,?,?,?,?)", data_formatted)
         return redirect("/thanks")
     else:
-        print(setting_values["inputSetting"])
-        print(setting_values["volume"])
-        print(data_formatted)
         if (setting_values["inputSetting"] == None or setting_values["volume"] == None or len(data_formatted) == 0):
             return redirect("/")
         return render_template("qns.html", path = "/qns", err = err)
