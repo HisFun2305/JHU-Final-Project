@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", async function(){
 
     getRandomFreq()
     //calibration sequence
-    var calibList = [2000, 1800, 1600, 1400, 1200, 1000, 800, 600]
+    var calibList = [2000, 1800, 1600, 1400, 1200, 1000, 800, 600, 400]
     await new Promise(function(resolve){
         var beep = seqTimer(function(){
             audio.volume = (volVal/100);
