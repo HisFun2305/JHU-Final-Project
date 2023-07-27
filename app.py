@@ -97,11 +97,11 @@ def qns():
             return redirect(url_for(".index", error = "?"))
         return redirect("/thanks")
     else:
-        if (setting_values == None or setting_values["inputSetting"] == None or setting_values["volume"] == None or len(data_formatted) == 0):
-            print("FKKKKKKKKK3")
-            print(setting_values)
-            print(data_formatted)
-            return redirect("/")
+        # if (setting_values == None or setting_values["inputSetting"] == None or setting_values["volume"] == None or len(data_formatted) == 0):
+        #     print("FKKKKKKKKK3")
+        #     print(setting_values)
+        #     print(data_formatted)
+        #     return redirect("/")
         return render_template("qns.html", path = "/qns", err = err)
 
 @app.route("/settings", methods = ["GET"])
