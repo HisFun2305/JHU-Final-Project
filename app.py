@@ -20,10 +20,10 @@ def create_connection(DB_PATH):
 # Configure application
 app = Flask(__name__)
 
-data_formatted = []
-
 @app.route("/", methods = ["GET", "POST"])
 def index():
+    global data_formatted 
+    data_formatted = []
     global setting_values 
     setting_values = {"volume": None, "inputSetting": None}
     if request.method == "POST":
@@ -40,9 +40,9 @@ def index():
 @app.route("/exp", methods = ["GET", "POST"])
 def exp():
     global setting_values
+    global data_formatted
     if request.method == "POST":
         data = request.json
-        print(data)
         try: 
             data_formatted.append("|".join(data[0]))
         except Exception as e: 
@@ -53,7 +53,6 @@ def exp():
                 data_formatted.append("|".join(x))
             except: 
                 return redirect("/")
-        print(data_formatted)
         return "200_OK"
     else:
         if (setting_values["inputSetting"] == None or setting_values["volume"] == None):
@@ -65,6 +64,7 @@ def exp():
 @app.route("/qns", methods = ["GET", "POST"])
 def qns():
     global setting_values
+    global data_formatted
     err = ""
     if request.method == "POST":
         age = request.form.get("ageGrp")
@@ -84,7 +84,9 @@ def qns():
         conn = create_connection(DB_PATH)
         db = conn.cursor()
         data_formatted.extend([int(age), int(exp), request.form.get("med")])
-        try: db.execute("INSERT INTO data (freq, calib, a, b, c, d, e, ageGrp, exp, med) VALUES (?,?,?,?,?,?,?,?,?,?)", data_formatted)
+        try: 
+            db.execute("INSERT INTO data (freq, calib, a, b, c, d, e, ageGrp, exp, med) VALUES (?,?,?,?,?,?,?,?,?,?)", data_formatted)
+            conn.commit();
         except Exception as e: 
             print(e)
             return redirect(url_for(".index", error = "?"))
