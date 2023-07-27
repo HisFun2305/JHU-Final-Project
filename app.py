@@ -1,12 +1,14 @@
 import os
 import json
+from pathlib import Path
 
 from flask import Flask, flash, redirect, render_template, request, url_for, send_file
 
 import sqlite3
 from sqlite3 import Error
 
-DB_PATH = "data.sqlite"
+THIS_FOLDER = Path(__file__).parent.resolve()
+DB_PATH = THIS_FOLDER / "\data.sqlite"
 
 def create_connection(DB_PATH):
     connection = None
