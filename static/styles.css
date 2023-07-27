@@ -40,7 +40,7 @@ p.cdown{
     font-weight: 900;
     position: absolute;
     opacity: 0;
-    font-size: 50vw;
+    font-size: 30vw;
     transition: opacity, 0.5s, font-size, 0.5s;
 }
 

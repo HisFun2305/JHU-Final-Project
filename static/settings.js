@@ -6,11 +6,13 @@ async function logJSONData() {
     return new Promise(async function(resolve){
         const response = await fetch("/settings");
         const jsonData = await response.json();
-        volVal = jsonData.volume
+        if (jsonData.volume){
+            volVal = jsonData.volume
+        }
         if (jsonData.inputSetting == 0){
             btn2Checked = "checked", btn1Checked = ""
         }
-        else {
+        else if (jsonData.inputSetting == 1){
             btn2Checked = "", btn1Checked = "checked"
         }
         resolve(jsonData);
@@ -45,6 +47,7 @@ function dynSettings(){
 }
 
 document.addEventListener("DOMContentLoaded", async function(){
+    logJSONData();
     var settings = document.getElementById("settings")
     var settingsForm = document.getElementById("settings-input")
 
@@ -110,6 +113,7 @@ document.addEventListener("DOMContentLoaded", async function(){
                     event.preventDefault();              
                     var data = {volume: vol.value, inputSetting: b2.checked ? 0 : 1};
                     postJSON(data);
+                    window.location.href = window.location.href;
                 })
                 resolve(true)
             }, 200);
