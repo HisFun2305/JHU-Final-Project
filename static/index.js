@@ -2,18 +2,6 @@ const width = window.innerWidth;
 const height = window.innerHeight;
 var audio = new Audio("static/audio/Procedural Jiggle Bone.mp3")
 
-function initBegin(){
-    div.addEventListener("keypress", async function(event) {
-        if (event.code === "Space") {
-            for (c of div.children){
-                c.style.textShadow = ""
-                div.removeEventListener("mousemove", spicyShadows)
-            }
-            div.style.color = "transparent"
-        }
-    });
-}
-
 function spicyShadows(event){
     var x = event.clientX
     var y = event.clientY
@@ -43,7 +31,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
         event.preventDefault();
         event.stopPropagation();
         var data = {volume: vol.value, inputSetting: b2.checked ? 0 : 1};
-        console.log(data)
         postJSON(data);
         var cont = document.getElementById("txt3");
         cont.style.opacity = 1;
@@ -88,6 +75,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }
     })
     b1.addEventListener("click", function(event){
+        event.preventDefault()
+        event.stopPropagation()
         btn1Checked = "checked"
         btn2Checked = ""
         var b1Settings = document.getElementById("btnradio1")
@@ -98,6 +87,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }
     })
     b2.addEventListener("click", function(event){
+        event.preventDefault()
+        event.stopPropagation()
         btn2Checked = "checked"
         btn1Checked = ""
         var txtOut = document.getElementById("txt2")

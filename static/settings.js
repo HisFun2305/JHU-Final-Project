@@ -6,7 +6,6 @@ async function logJSONData() {
     return new Promise(async function(resolve){
         const response = await fetch("/settings");
         const jsonData = await response.json();
-        console.log(jsonData)
         volVal = jsonData.volume
         if (jsonData.inputSetting == 0){
             btn2Checked = "checked", btn1Checked = ""
@@ -17,6 +16,7 @@ async function logJSONData() {
         resolve(jsonData);
     });
 }
+logJSONData();
 
 async function postJSON(data) {
     try {
@@ -47,7 +47,6 @@ function dynSettings(){
 document.addEventListener("DOMContentLoaded", async function(){
     var settings = document.getElementById("settings")
     var settingsForm = document.getElementById("settings-input")
-    await logJSONData();
 
     function initSettings() {
         settings = document.getElementById("settings")

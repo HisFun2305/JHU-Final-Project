@@ -16,6 +16,7 @@ div#desc {
     color: azure;
     text-align: center;
     font-family: Notosans, Calibri;
+    transition: opacity, 18ms;
 }
 
 div>h2 {
@@ -33,11 +34,22 @@ p {
     transition: opacity, 1s;
 }
 
+p.cdown{
+    font-family: Handjet,'Courier New', Courier, monospace;
+    font-style: italic;
+    font-weight: 900;
+    position: absolute;
+    opacity: 0;
+    font-size: 50vw;
+    transition: opacity, 0.5s, font-size, 0.5s;
+}
+
 form{
     transition: opacity, 1s;
 }
 
 label {
+    margin-top: 0.4rem;
     text-shadow: None;
     color: black;
     margin-right: 0.5rem;
@@ -82,6 +94,12 @@ label {
 
 .lg {
     display: inherit;
+}
+
+.prevent-select {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 }
 
 #txt3{
@@ -153,12 +171,41 @@ label {
     .btn {
         font-size: 11px;
     }
+
+    div>.slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 15px;
+      background: #222222;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+    }
+    
+    div>.slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 15px;
+      height: 15px;
+    }
+    
+    div>.slider::-moz-range-thumb {
+      width: 15px;
+      height: 15px;
+    }
 }
 
 @font-face {
     font-family: NotoSans;
     src: url(fonts/Noto_Sans/NotoSans-Regular.ttf)
 }
+
+@font-face {
+    font-family: Handjet;
+    src: url(fonts/Handjet/static/Handjet-Regular.ttf)
+}
+
 .slider {
   -webkit-appearance: none;
   width: 100%;
