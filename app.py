@@ -96,6 +96,7 @@ def qns():
         return redirect("/thanks")
     else:
         if (setting_values == None or setting_values["inputSetting"] == None or setting_values["volume"] == None or len(data_formatted) == 0):
+            print("FKKKKKKKKK")
             return redirect("/")
         return render_template("qns.html", path = "/qns", err = err)
 
