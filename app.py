@@ -15,7 +15,6 @@ def create_connection(DB_PATH):
         print("Connection to SQLite DB successful")
     except Error as e:
         print(f"The error '{e}' occurred")
-
     return connection
 
 # Configure application
@@ -34,6 +33,8 @@ def index():
     else:
         if request.args.get("error") == "vol":
             return render_template("index.html", path = "/", err = "Please input an audible volume")
+        if request.args.get("error") == "?":
+            return render_template("index.html", path = "/", err = "The server is experiencing some technical difficulties. Please try again later.")
         return render_template("index.html", path = "/")
 
 @app.route("/exp", methods = ["GET", "POST"])
@@ -52,6 +53,7 @@ def exp():
                 data_formatted.append("|".join(x))
             except: 
                 return redirect("/")
+        print(data_formatted)
         return "200_OK"
     else:
         if (setting_values["inputSetting"] == None or setting_values["volume"] == None):
@@ -82,7 +84,10 @@ def qns():
         conn = create_connection(DB_PATH)
         db = conn.cursor()
         data_formatted.extend([int(age), int(exp), request.form.get("med")])
-        db.execute("INSERT INTO data (a, b, c, d, e, ageGrp, exp, med) VALUES (?,?,?,?,?,?,?,?)", data_formatted)
+        try: db.execute("INSERT INTO data (freq, calib, a, b, c, d, e, ageGrp, exp, med) VALUES (?,?,?,?,?,?,?,?,?,?)", data_formatted)
+        except Exception as e: 
+            print(e)
+            return redirect("/", error = "?")
         return redirect("/thanks")
     else:
         if (setting_values["inputSetting"] == None or setting_values["volume"] == None or len(data_formatted) == 0):
