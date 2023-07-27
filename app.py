@@ -8,7 +8,7 @@ import sqlite3
 from sqlite3 import Error
 
 THIS_FOLDER = Path(__file__).parent.resolve()
-DB_PATH = THIS_FOLDER / "\data.sqlite"
+DB_PATH = THIS_FOLDER / "data.sqlite"
 
 def create_connection(DB_PATH):
     connection = None
