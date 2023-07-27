@@ -87,7 +87,7 @@ def qns():
         try: db.execute("INSERT INTO data (freq, calib, a, b, c, d, e, ageGrp, exp, med) VALUES (?,?,?,?,?,?,?,?,?,?)", data_formatted)
         except Exception as e: 
             print(e)
-            return redirect("/", error = "?")
+            return redirect(url_for(".index", error = "?"))
         return redirect("/thanks")
     else:
         if (setting_values == None or setting_values["inputSetting"] == None or setting_values["volume"] == None or len(data_formatted) == 0):
