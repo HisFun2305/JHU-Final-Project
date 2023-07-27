@@ -100,7 +100,8 @@ document.addEventListener("DOMContentLoaded", async function(){
             event.stopPropagation();
             c++;
             console.log(c);
-            timeList.push(new Date().getTime() - begin)
+            let t = new Date().getTime() - begin
+            timeList.push(t.toString())
             if (c == num){
                 timeLists.push(timeList);
                 clearTimeout(esc);
@@ -113,7 +114,8 @@ document.addEventListener("DOMContentLoaded", async function(){
                 console.log(num);
                 event.stopPropagation();
                 c++;
-                timeList.push(new Date().getTime() - begin);
+                let t = new Date().getTime() - begin
+                timeList.push(t.toString())
                 if (c == num){
                     timeLists.push(timeList);
                     clearTimeout(esc);
@@ -154,7 +156,8 @@ document.addEventListener("DOMContentLoaded", async function(){
                 console.log(num)
                 event.stopPropagation()
                 c++
-                timeList.push(new Date().getTime() - begin)
+                let t = new Date().getTime() - begin
+                timeList.push(t.toString())
                 if (c == num){
                     beep.cancel();
                     clearTimeout(esc);
@@ -168,7 +171,8 @@ document.addEventListener("DOMContentLoaded", async function(){
                     console.log(num)
                     event.stopPropagation()
                     c++
-                    timeList.push(new Date().getTime() - begin)
+                    let t = new Date().getTime() - begin
+                    timeList.push(t.toString())
                     if (c == num){
                         beep.cancel();
                         clearTimeout(esc);

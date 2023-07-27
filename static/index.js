@@ -75,7 +75,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }
     })
     b1.addEventListener("click", function(event){
-        event.preventDefault()
         event.stopPropagation()
         btn1Checked = "checked"
         btn2Checked = ""
@@ -87,10 +86,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }
     })
     b2.addEventListener("click", function(event){
-        event.preventDefault()
         event.stopPropagation()
-        btn2Checked = "checked"
-        btn1Checked = ""
+        btn2Checked = ""
+        btn1Checked = "checked"
         var txtOut = document.getElementById("txt2")
         txtOut.innerText = "Your task is simple: whenever you hear a beep, click the left mouse button or tap the screen, and try to follow the rhythm."
         var b2Settings = document.getElementById("btnradio2")

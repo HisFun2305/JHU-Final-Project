@@ -32,6 +32,8 @@ def index():
         setting_values["inputSetting"] = request.json["inputSetting"]
         return "200_OK"
     else:
+        if request.args.get("error") == "vol":
+            return render_template("index.html", path = "/", err = "Please input an audible volume")
         return render_template("index.html", path = "/")
 
 @app.route("/exp", methods = ["GET", "POST"])
@@ -39,15 +41,22 @@ def exp():
     global setting_values
     if request.method == "POST":
         data = request.json
-        try: data_formatted[0] = "|".join(data[0])
-        except: return redirect("/")
+        try: 
+            data_formatted[0] = "|".join(data[0])
+        except Exception as e: 
+            print(e)
+            return redirect("/")
         for x in data[1]:
-            try: data_formatted.append("|".join(x))
-            except: return redirect("/")
+            try: 
+                data_formatted.append("|".join(x))
+            except: 
+                return redirect("/")
         return "200_OK"
     else:
         if (setting_values["inputSetting"] == None or setting_values["volume"] == None):
             return redirect("/")
+        if(setting_values["volume"] == 0):
+            return redirect(url_for(".index", error = "vol"))
         return render_template("exp.html", path = "/exp")
 
 @app.route("/qns", methods = ["GET", "POST"])
@@ -75,6 +84,9 @@ def qns():
         db.execute("INSERT INTO data (a, b, c, d, e, ageGrp, exp, med) VALUES (?,?,?,?,?,?,?,?)", data_formatted)
         return redirect("/thanks")
     else:
+        print(setting_values["inputSetting"])
+        print(setting_values["volume"])
+        print(data_formatted)
         if (setting_values["inputSetting"] == None or setting_values["volume"] == None or len(data_formatted) == 0):
             return redirect("/")
         return render_template("qns.html", path = "/qns", err = err)
