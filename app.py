@@ -54,6 +54,7 @@ def exp():
             try: 
                 data_formatted.append("|".join(x))
             except: 
+                print(e)
                 return redirect("/")
         return "200_OK"
     else:
