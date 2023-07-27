@@ -54,11 +54,13 @@ def exp():
             try: 
                 data_formatted.append("|".join(x))
             except Exception as e: 
+                print("FKKKKKKKKK")
                 print(e)
                 return redirect("/")
         return "200_OK"
     else:
         if (setting_values["inputSetting"] == None or setting_values["volume"] == None):
+            print("FKKKKKKKKK2")
             return redirect("/")
         if(setting_values["volume"] == 0):
             return redirect(url_for(".index", error = "vol"))
@@ -96,6 +98,7 @@ def qns():
         return redirect("/thanks")
     else:
         if (setting_values == None or setting_values["inputSetting"] == None or setting_values["volume"] == None or len(data_formatted) == 0):
+            print("FKKKKKKKKK3")
             return redirect("/")
         return render_template("qns.html", path = "/qns", err = err)
 
