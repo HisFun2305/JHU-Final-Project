@@ -24,8 +24,6 @@ app = Flask(__name__)
 
 @app.route("/", methods = ["GET", "POST"])
 def index():
-    global data_formatted 
-    data_formatted = []
     global setting_values 
     setting_values = {"volume": None, "inputSetting": None}
     if request.method == "POST":
@@ -42,7 +40,8 @@ def index():
 @app.route("/exp", methods = ["GET", "POST"])
 def exp():
     global setting_values
-    global data_formatted
+    global data_formatted 
+    data_formatted = []
     if request.method == "POST":
         data = request.json
         try: 
